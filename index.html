@@ -1,0 +1,161 @@
+
+<html>
+<head>
+  <script id="vertexShaderId" type="not-javascript">
+    attribute vec4 vPosition;
+    attribute vec4 vColor;
+    varying vec4 fColor;
+
+    uniform mat4 basisMatrix;
+    uniform mat4 rotateMatrix;
+    uniform vec3 trans_values;
+
+    void main() {
+        //instance translations on the cubes to shape rubiks cube
+        mat4 trans = mat4(  1, 0, 0, trans_values.x,
+                            0, 1, 0, trans_values.y,
+                            0, 0, 1, trans_values.z,
+                            0, 0, 0, 1 );
+
+        fColor = vColor;
+        gl_Position = vPosition * trans * rotateMatrix * basisMatrix;
+    } 
+  </script>
+  <script id="fragmentShaderId" type="not-javascript">
+    precision mediump float;
+    varying vec4 fColor;
+    void main() {
+        gl_FragColor = fColor;
+    }
+  </script>
+
+  <title>Rubik's Cube</title>
+</head>
+
+<body>
+  <div id="main-content" style="width:900px; display:block; margin:auto;">
+    <canvas id="gl-canvas" width="512" height="512" style="background-color:gray; border:1px solid black; width:65%; float:left;">
+    Oops ... your browser doesn't support the HTML5 canvas element
+    </canvas>
+       
+    <div id="controlPanel" style="width:30%; float:right; text-align:center;">
+      <br/>
+      <div>
+        <b>Scrambler:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="scrambleID" type="number" min="5" max="40" value="15" step="5"></input>
+        <button onclick="Scramble()">Scramble</button>
+      </div>
+      <br/>
+
+
+
+      <hr>
+      <h4>Rotate Faces by Colors</h4>
+      <div style="width:70%; margin:auto;">
+        
+      <table style="width:100%;">
+        <tr>
+          <td></td>
+          <td><b style="float:right;">CC &nbsp;CW</b></td>
+        </tr>
+        <tr>
+          <td><span style="float:left; height:25px"><b>W</b>HITE</span></td>
+          <td style="float:right;">
+            <button onclick="rotateWhite(1)" style="float:right;"> >> </button>
+            <button onclick="rotateWhite(-1)" style="float:right;"> << </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td><span style="float:left; height:25px"><b>Y</b>ELLOW</span></td>
+          <td style="float:right;">
+            <button onclick="rotateYellow(1)" style="float:right;"> >> </button>
+            <button onclick="rotateYellow(-1)" style="float:right;"> << </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td><span style="float:left; height:25px"><b>O</b>RANGE</span></td>
+          <td style="float:right;">
+            <button onclick="rotateOrange(1)" style="float:right;"> >> </button>
+            <button onclick="rotateOrange(-1)" style="float:right;"> << </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><span style="float:left; height:25px"><b>R</b>ED</span></td>
+          <td style="float:right;">
+            <button onclick="rotateRed(1)" style="float:right;"> >> </button>
+            <button onclick="rotateRed(-1)" style="float:right;"> << </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><span style="float:left; height:25px"><b>G</b>REEN</span></td>
+          <td style="float:right;">
+            <button onclick="rotateGreen(1)" style="float:right;"> >> </button>
+            <button onclick="rotateGreen(-1)" style="float:right;"> << </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><span style="float:left; height:25px"><b>B</b>LUE</span></td>
+          <td style="float:right;">
+            <button onclick="rotateBlue(1)" style="float:right;"> >> </button>
+            <button onclick="rotateBlue(-1)" style="float:right;"> << </button>
+          </td>
+        </tr>
+      </table>
+    </div >
+      
+
+
+      <br/>
+      Rotation Speed:
+      <br/>
+      1 <input id="sliderID" type="range" min="1" max="15" step="1" value ="3"></input> 15
+      <br/>
+      <br/>
+      <h1 id="winnerID" style="display:none;">YOU WON!</br><(^  ..  ^)></h1>
+      <br/>
+      <p id="disclaimer" style="text-align:left; font-size:10px;"> 
+        ** Rotates the face with the center cube of that color <br/>
+        -Clicking "RED CW", rotates face with red center cube Clockwise <br/>
+        <br/>
+        CC = Counter Clockwise <br/> 
+        CW = Clockwise <br/> 
+        Colors can also be rotated with the Bolded letters <br/>
+        &nbsp;&nbsp;&nbsp;'letter' -> clockwise rotation <br/>
+        &nbsp;&nbsp;&nbsp;Shift + 'letter' -> counter clockwise rotation <br/>
+      </p>
+
+
+      <hr>
+      
+      <button onclick="saveToFile()" style="width:250px; height:30px;">Save Current State of Game</button>
+      
+      <hr>
+
+      <input type="file" id="uploadFileID" style="padding-bottom:5px;"/>
+      <br/>
+      <button onclick="loadFile()" style="width:250px; height:30px;">Load Game</button>
+      <br/>
+      
+    </div>
+  </div>
+
+  
+  <script type="text/javascript" src="./Common/webgl-utils.js"></script>
+  <script type="text/javascript" src="./Common/initShaders.js"></script>
+  <script type="text/javascript" src="./Common/MV.js"></script>
+  <script type="text/javascript" src="./app.js"></script>
+
+
+
+
+
+</body>
+
+
+
+</html>
