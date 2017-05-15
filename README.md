@@ -1,6 +1,8 @@
 # rubiksCube
 Computer Graphics Midterm Project
 
+[Play with Rubik's Cube](http://stanleyzheng.github.io/rubiksCube)
+
 - Incomplete Code: 
 
    win condition checking is improperly implemented  
