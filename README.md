@@ -1,7 +1,7 @@
-# rubiksCube
+# RubiksCube
 Computer Graphics Midterm Project
 
-[Play with Rubik's Cube](http://stanleyzheng.github.io/rubiksCube)
+[Play with Rubik's Cube](http://stanleyzheng.github.io/RubiksCube)
 
 - Incomplete Code: 
 
